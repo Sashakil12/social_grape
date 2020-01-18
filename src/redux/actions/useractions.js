@@ -24,3 +24,17 @@ export const userDataFetchFailed = error => ({
   type: userTypes.USER_DATA_FETCH_FAILED,
   payload: error
 });
+
+export const userSignUpStarted = () => ({
+  type: userTypes.USER_SIGNUP_STARTED
+});
+
+export const userSignUpSuccess = token => ({
+  type: userTypes.USER_SIGNUP_SUCCESS,
+  payload: token
+});
+
+export const userSignUpFailed = error => ({
+  type: userTypes.USER_SIGNUP_FAILED,
+  payload: error
+});

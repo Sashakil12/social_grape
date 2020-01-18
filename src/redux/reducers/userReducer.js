@@ -9,12 +9,15 @@ const initialState = {
   errors: {
     email: null,
     password: null,
+    confirmPassword: null,
+    handle: null,
     error: null
   }
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case userTypes.USER_LOGIN_STARTED:
+    case userTypes.USER_SIGNUP_STARTED:
       return {
         ...state,
         loading: true,
@@ -22,6 +25,7 @@ const userReducer = (state = initialState, action) => {
         authenticated: false
       };
     case userTypes.USER_LOGIN_FAILURE:
+    case userTypes.USER_SIGNUP_FAILED:
       return {
         ...state,
         errors: {
@@ -32,6 +36,7 @@ const userReducer = (state = initialState, action) => {
         loading: false
       };
     case userTypes.USER_LOGIN_SUCCESS:
+    case userTypes.USER_SIGNUP_SUCCESS:
       return {
         ...state,
         token: action.payload,

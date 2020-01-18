@@ -47,7 +47,6 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      loading: false
     };
   }
   handleSubmit = e => {

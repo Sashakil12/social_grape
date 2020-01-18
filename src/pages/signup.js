@@ -3,8 +3,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import AppIcon from "../assets/grape--v2.png";
 import { Link } from "react-router-dom";
-import axios from "../utils/axios";
-
+import { signUserUp } from "../redux/thunks/signUpThunk";
+import { connect } from "react-redux";
 // /Mui staff
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -47,9 +47,7 @@ class SignUp extends Component {
       email: "",
       password: "",
       confirmPassword: "",
-      handle: "",
-      loading: false,
-      errors: {}
+      handle: ""
     };
   }
   handleSubmit = e => {
@@ -63,21 +61,7 @@ class SignUp extends Component {
       handle: this.state.handle
     };
     console.log(this.props.history);
-    axios
-      .post("/signup", userData)
-      .then(res => {
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        console.log(res.data);
-        this.setState({ loading: false });
-        this.props.history.push("/");
-      })
-      .catch(err => {
-        console.log(err.response.data);
-        this.setState({
-          loading: false,
-          errors: err.response.data
-        });
-      });
+    this.props.signUserUp(userData, this.props.history);
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -88,7 +72,7 @@ class SignUp extends Component {
   };
   render() {
     const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const { errors, loading } = this.props.user;
     return (
       <Grid container className={classes.form}>
         <Grid item sm />
@@ -181,4 +165,13 @@ class SignUp extends Component {
 SignUp.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withStyles(styles)(SignUp);
+const mapStateToProps = state => ({
+  user: state.user
+});
+const mapDispatchToProps = {
+  signUserUp: signUserUp
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SignUp));

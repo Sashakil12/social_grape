@@ -5,7 +5,10 @@ import {
   setUserData,
   userDataFetchStarted,
   userdataFetchSuccess,
-  userDataFetchFailed
+  userDataFetchFailed,
+  userSignUpStarted,
+  userSignUpSuccess,
+  userSignUpFailed
 } from "../actions/useractions";
 export const logUserIn = (userData, history) => dispatch => {
   dispatch(logInUser());
@@ -20,8 +23,8 @@ export const logUserIn = (userData, history) => dispatch => {
       ] = `Bearer ${res.data.token}`;
 
       dispatch(setUserData(res.data.token));
-      history.push("/");
       dispatch(getUserData());
+      history.push("/");
     })
     .catch(err => {
       console.log(err.response.data);
@@ -29,14 +32,21 @@ export const logUserIn = (userData, history) => dispatch => {
     });
 };
 
-const getUserData = () => dispatch => {
+export const getUserData = () => dispatch => {
   dispatch(userDataFetchStarted());
   axios
     .get("/user")
     .then(res => {
+      console.log(res.data);
+      if (res.data.hasOwnProperty("likes")) {
+        return;
+      } else {
+        res.data.likes = [];
+      }
       dispatch(userdataFetchSuccess(res.data));
     })
     .catch(err => {
       console.log(err);
+      userDataFetchFailed(err);
     });
 };
