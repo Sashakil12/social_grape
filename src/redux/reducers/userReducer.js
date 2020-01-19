@@ -65,6 +65,27 @@ const userReducer = (state = initialState, action) => {
           ...action.payload
         }
       };
+    case userTypes.USER_IMAGE_UPLOAD_SUCCESS:
+      return {
+        ...state,
+        loading:true,
+        errors: initialState.errors
+      }
+    case userTypes.USER_IMAGE_UPLOAD_STARTED:
+      return {
+        ...state,
+        errors: initialState.errors,
+      }
+    case userTypes.USER_IMAGE_UPLOAD_FAILED:
+      return{
+        ...state,
+        loading: false,
+        errors: {
+          ...state.errors,
+        ...action.payload}
+      }
+    case userTypes.USER_LOGOUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }

@@ -2,51 +2,46 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import jwtDecode from "jwt-decode";
-
+import { connect } from "react-redux";
 //pages
 import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 //redux
-
+import { LogUserOut } from "./redux/thunks/logoutThunk";
+import { sessionInit } from "./redux/thunks/sessioninitializer";
 //components
 import Navbar from "./components/Navbar";
-import AuthRoute from "./components/AuthRoute";
-let authenticated;
-const token = localStorage.FBIdToken;
-if (token) {
-  const decodedToken = jwtDecode(token);
-  if (decodedToken.exp * 1000 < Date.now()) {
-    authenticated = false;
-  } else {
-    authenticated = true;
-  }
-}
+
 class App extends React.Component {
+  componentDidMount() {
+    this.props.sessionInit();
+  }
   render() {
+    const { authenticated } = this.props.user;
     return (
       <div className="App">
-        <Navbar />
+        <Navbar
+          auth={authenticated ? true : false}
+          logOut={this.props.logUserOut}
+        />
         <div className="container">
           <Switch>
             <Route exact path="/" component={Home} />
-            <AuthRoute
-              exact
-              path="/login"
-              component={Login}
-              auth={authenticated}
-            />
-            <AuthRoute
-              exact
-              path="/signup"
-              component={SignUp}
-              auth={authenticated}
-            />
+
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
           </Switch>
         </div>
       </div>
     );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({
+  user: state.user
+});
+const mapDispatchToProps = dispatch => ({
+  logUserOut: () => dispatch(LogUserOut()),
+  sessionInit: () => dispatch(sessionInit())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);

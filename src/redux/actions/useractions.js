@@ -16,7 +16,7 @@ export const logInFailed = error => ({
 export const userDataFetchStarted = () => ({
   type: userTypes.USER_DATA_FETCH_STARTED
 });
-export const userdataFetchSuccess = userData => ({
+export const userDataFetchSuccess = userData => ({
   type: userTypes.USER_DATA_FETCH_SUCCESS,
   payload: userData
 });
@@ -37,4 +37,19 @@ export const userSignUpSuccess = token => ({
 export const userSignUpFailed = error => ({
   type: userTypes.USER_SIGNUP_FAILED,
   payload: error
+});
+
+export const userLogout = () => ({
+  type: userTypes.USER_LOGOUT_SUCCESS
+});
+export const userImageUploadStarted = image => ({
+  type: userTypes.USER_IMAGE_UPLOAD_STARTED,
+  payload: image
+});
+export const userImageUploadSucceed = () => ({
+  type: userTypes.USER_IMAGE_UPLOAD_SUCCESS
+});
+export const userImageUploadFailed = err => ({
+  type: userTypes.USER_IMAGE_UPLOAD_FAILED,
+  payload: err
 });

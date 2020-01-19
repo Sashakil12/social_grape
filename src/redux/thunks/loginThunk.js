@@ -4,11 +4,8 @@ import {
   logInUser,
   setUserData,
   userDataFetchStarted,
-  userdataFetchSuccess,
-  userDataFetchFailed,
-  userSignUpStarted,
-  userSignUpSuccess,
-  userSignUpFailed
+  userDataFetchSuccess,
+  userDataFetchFailed
 } from "../actions/useractions";
 export const logUserIn = (userData, history) => dispatch => {
   dispatch(logInUser());
@@ -37,16 +34,15 @@ export const getUserData = () => dispatch => {
   axios
     .get("/user")
     .then(res => {
-      console.log(res.data);
       if (res.data.hasOwnProperty("likes")) {
-        return;
+        dispatch(userDataFetchSuccess(res.data));
       } else {
         res.data.likes = [];
+        dispatch(userDataFetchSuccess(res.data));
       }
-      dispatch(userdataFetchSuccess(res.data));
     })
     .catch(err => {
       console.log(err);
-      userDataFetchFailed(err);
+      dispatch(userDataFetchFailed(err.response.data));
     });
 };
