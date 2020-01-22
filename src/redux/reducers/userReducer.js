@@ -1,4 +1,4 @@
-import { userTypes } from "../types";
+import { userTypes, likeTypes } from "../types";
 const initialState = {
   token: undefined,
   authenticated: false,
@@ -29,6 +29,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: {
+          ...state.errors,
           ...action.payload
         },
 
@@ -62,30 +63,53 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         errors: {
+          ...state.errors,
           ...action.payload
         }
       };
-    case userTypes.USER_IMAGE_UPLOAD_SUCCESS:
-      return {
-        ...state,
-        loading:true,
-        errors: initialState.errors
-      }
     case userTypes.USER_IMAGE_UPLOAD_STARTED:
+    case userTypes.USER_BIO_UPDATE_STARTED:
       return {
         ...state,
-        errors: initialState.errors,
-      }
+        loading: true,
+        errors: initialState.errors
+      };
+    case userTypes.USER_IMAGE_UPLOAD_SUCCESS:
+    case userTypes.USER_BIO_UPDATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        errors: initialState.errors
+      };
     case userTypes.USER_IMAGE_UPLOAD_FAILED:
-      return{
+    case userTypes.USER_BIO_UPDATE_FAILED:
+      return {
         ...state,
         loading: false,
         errors: {
           ...state.errors,
-        ...action.payload}
-      }
+          ...action.payload
+        }
+      };
     case userTypes.USER_LOGOUT_SUCCESS:
       return initialState;
+    case likeTypes.LIKE_SCREAM:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
+            userHandle: state.credentials.handle,
+            screamId: action.payload.screamId
+          }
+        ]
+      };
+    case likeTypes.UNLIKE_SCREAM:
+      return {
+        ...state,
+        likes: state.likes.filter(l => l.screamId !== action.payload.screamId)
+      };
+   
     default:
       return state;
   }

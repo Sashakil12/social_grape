@@ -53,3 +53,13 @@ export const userImageUploadFailed = err => ({
   type: userTypes.USER_IMAGE_UPLOAD_FAILED,
   payload: err
 });
+export const userBioUpdateStarted = () => ({
+  type: userTypes.USER_BIO_UPDATE_STARTED
+});
+export const userBioUpdateSuccess = () => ({
+  type: userTypes.USER_BIO_UPDATE_SUCCESS
+});
+export const userBioUpdateFailed = err => ({
+  type: userTypes.USER_BIO_UPDATE_FAILED,
+  payload: err
+});

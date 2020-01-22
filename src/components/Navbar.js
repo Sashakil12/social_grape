@@ -1,10 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 //MUI
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
+//icons
+import HomeIcon from "@material-ui/icons/Home";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
+import LoginIcon from "@material-ui/icons/VpnKey";
+import SignUpIcon from "@material-ui/icons/EmojiPeople";
+import PostAScream from "./postScreamForm";
+import MyButton from "./MyButton";
 export class Navbar extends Component {
   render() {
     const { auth, logOut, history } = this.props;
@@ -12,27 +20,41 @@ export class Navbar extends Component {
       <div>
         <AppBar>
           <Toolbar className="nav-container">
-            <Button color="inherit">
-              <Link to="/">Home</Link>
-            </Button>
+            <Fragment>
+              <MyButton tip="Home">
+                <Link to="/">
+                  <HomeIcon color="secondary" />
+                </Link>
+              </MyButton>
+            </Fragment>
             {auth ? (
-              <Button
-                color="inherit"
-                onClick={() => {
-                  logOut();
-                  history.push("/");
-                }}
-              >
-                logout
-              </Button>
+              <Fragment>
+                <MyButton
+                  tip="Logout"
+                  onClick={() => {
+                    logOut();
+                    history.push("/");
+                  }}
+                >
+                  <LogoutIcon color="secondary" />
+                </MyButton>
+                <PostAScream />
+                <MyButton tip="notifications">
+                  <NotificationsIcon color="secondary" />
+                </MyButton>
+              </Fragment>
             ) : (
               <div>
-                <Button color="inherit" />
-                <Link to="/login">login</Link>
-                <Button />
-                <Button color="inherit" />
-                <Link to="/signup">sign up</Link>
-                <Button />
+                <MyButton tip="login">
+                  <Link to="/login">
+                    <LoginIcon color="secondary" />
+                  </Link>
+                </MyButton>
+                <MyButton tip="signOut" />
+                <Link to="/signup">
+                  <SignUpIcon color="secondary" />
+                </Link>
+                <MyButton />
               </div>
             )}
           </Toolbar>

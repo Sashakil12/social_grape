@@ -23,6 +23,16 @@ export const signUserUp = (userData, history) => dispatch => {
     })
     .catch(err => {
       console.log(err.response.data);
-      dispatch(userSignUpFailed(err.response.data));
+
+      if (typeof err === "object") {
+        if (err.hasOwnProperty("response")) {
+          if (err.response.hasOwnProperty("data")) {
+            console.log(err.response.data);
+            dispatch(userSignUpFailed(err.response.data));
+          }
+        }
+        console.log(err.response);
+      }
+      console.log(err);
     });
 };

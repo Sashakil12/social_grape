@@ -7,6 +7,7 @@ import {
   userDataFetchSuccess,
   userDataFetchFailed
 } from "../actions/useractions";
+
 export const logUserIn = (userData, history) => dispatch => {
   dispatch(logInUser());
   axios
@@ -24,8 +25,17 @@ export const logUserIn = (userData, history) => dispatch => {
       history.push("/");
     })
     .catch(err => {
-      console.log(err.response.data);
-      dispatch(logInFailed(err.response.data));
+      console.log(err);
+      if (typeof err === "object") {
+        if (err.hasOwnProperty("response")) {
+          if (err.response.hasOwnProperty("data")) {
+            console.log(err.response.data);
+            dispatch(logInFailed(err.response.data));
+          }
+        }
+        console.log(err.response);
+      }
+      console.log(err);
     });
 };
 
@@ -43,6 +53,16 @@ export const getUserData = () => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      dispatch(userDataFetchFailed(err.response.data));
+
+      if (typeof err === "object") {
+        if (err.hasOwnProperty("response")) {
+          if (err.response.hasOwnProperty("data")) {
+            console.log(err.response.data);
+            return dispatch(userDataFetchFailed(err.response.data));
+          }
+        }
+        console.log(err.response);
+      }
+      console.log(err);
     });
 };

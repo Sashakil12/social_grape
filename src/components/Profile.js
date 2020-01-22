@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import EditDetails from './EditDetails'
 ///MUI stuff
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -100,6 +101,7 @@ class Profile extends React.Component {
               <span>Joined {dayjs(createdAt).format("MMM YY")}</span>
             </div>
           </div>
+          <EditDetails/>
         </Paper>
       ) : (
         <Paper className={classes.paper}>

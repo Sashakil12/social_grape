@@ -1,26 +1,25 @@
-import {
-  userImageUploadStarted,
-  userImageUploadSucceed,
-  userImageUploadFailed
-} from "../actions/useractions";
 import axios from "../../utils/axios";
+import {
+  userBioUpdateSuccess,
+  userBioUpdateStarted,
+  userBioUpdateFailed
+} from "../actions/useractions";
 import { getUserData } from "./loginThunk";
 
-export const UploadImage = FormData => dispatch => {
-  dispatch(userImageUploadStarted);
+export const updateUserBio = userData => dispatch => {
+  dispatch(userBioUpdateStarted());
   axios
-    .post("/user/image", FormData)
+    .post("/user", userData)
     .then(() => {
       dispatch(getUserData());
-      dispatch(userImageUploadSucceed());
+      dispatch(userBioUpdateSuccess());
     })
     .catch(err => {
-      console.log(err);
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
             console.log(err.response.data);
-            dispatch(userImageUploadFailed(err.response.data));
+            dispatch(userBioUpdateFailed(err.response.data));
           }
         }
         console.log(err.response);
