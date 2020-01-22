@@ -6,7 +6,6 @@ import LocalizedFormat from 'dayjs/plugin/localizedFormat'
 
 
 //comment list
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
@@ -54,7 +53,6 @@ class Comment extends Component {
   };
   handleChange = e => {
     const { name, value } = e.target;
-    console.log(name, value);
     this.setState({
       [name]: value
     });
@@ -62,7 +60,6 @@ class Comment extends Component {
 
   render() {
     const { currentScream, loading } = this.props;
-    console.log(currentScream);
     return (
       <Fragment>
         <Fragment>

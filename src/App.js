@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import jwtDecode from "jwt-decode";
 import { connect } from "react-redux";
 //pages
 import Home from "./pages/home";

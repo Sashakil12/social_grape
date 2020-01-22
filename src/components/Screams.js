@@ -34,7 +34,6 @@ const styles = {
 class Screams extends React.Component {
   componentDidMount() {
     this.props.loadScreams();
-    console.log("mounted");
   }
 
   render() {
@@ -42,7 +41,8 @@ class Screams extends React.Component {
       data: { screams },
       classes,
       currentUserHandle,
-      userAuth
+      userAuth,
+      likes
     } = this.props;
     return (
       <div>
@@ -70,7 +70,7 @@ class Screams extends React.Component {
                   {!userAuth ? (
                     <Typography>Please log in to see more...</Typography>
                   ) : (
-                    <Fragment id="interaction">
+                      <Fragment id="interaction">
                       <LikeButton screamId={scr.screamId} />
                       <Comment
                         commentCount={scr.commentCount}
@@ -98,7 +98,6 @@ Screams.propTypes = {
 const mapStateToProps = state => ({
   userAuth: state.user.authenticated,
   data: state.data,
-  likes: state.user.likes,
   currentUserHandle: state.user.credentials.handle
 });
 const mapDispatchToProps = dispatch => ({

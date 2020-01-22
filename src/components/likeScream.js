@@ -14,10 +14,8 @@ class LikeButton extends React.Component {
       this.props.likes &&
       this.props.likes.find(like => like.screamId === screamId)
     ) {
-      console.log("true");
       return true;
     }
-    console.log("false");
     return false;
   };
 

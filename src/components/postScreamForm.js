@@ -36,7 +36,6 @@ class PostAScream extends React.Component {
   };
   handleSubmit = e => {
     const ScreamData = { body: this.state.scream };
-    console.log(ScreamData);
     this.props.addScream(ScreamData);
     this.closeForm();
   };

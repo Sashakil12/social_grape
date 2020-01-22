@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 //MUI
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
+import Notification from "./Notification";
 //icons
 import HomeIcon from "@material-ui/icons/Home";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 import LoginIcon from "@material-ui/icons/VpnKey";
 import SignUpIcon from "@material-ui/icons/EmojiPeople";
@@ -15,7 +15,7 @@ import PostAScream from "./postScreamForm";
 import MyButton from "./MyButton";
 export class Navbar extends Component {
   render() {
-    const { auth, logOut, history } = this.props;
+    const { auth, logOut, history, notifications } = this.props;
     return (
       <div>
         <AppBar>
@@ -40,7 +40,7 @@ export class Navbar extends Component {
                 </MyButton>
                 <PostAScream />
                 <MyButton tip="notifications">
-                  <NotificationsIcon color="secondary" />
+                  <Notification notifications={notifications} />
                 </MyButton>
               </Fragment>
             ) : (
@@ -63,5 +63,8 @@ export class Navbar extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  notifications: state.user.notifications
+});
 
-export default withRouter(Navbar);
+export default connect(mapStateToProps)(withRouter(Navbar));

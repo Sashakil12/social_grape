@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import userReducer from "./reducers/userReducer";
-import uiReducer from "./reducers/uireducer";
 import dataReducer from "./reducers/datareducer";
 import profileReducer from "./reducers/userByhandle";
 

@@ -52,7 +52,6 @@ class SignUp extends Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     this.setState({ loading: true });
     const userData = {
       email: this.state.email,
@@ -60,12 +59,10 @@ class SignUp extends Component {
       confirmPassword: this.state.confirmPassword,
       handle: this.state.handle
     };
-    console.log(this.props.history);
     this.props.signUserUp(userData, this.props.history);
   };
   handleChange = e => {
     const { name, value } = e.target;
-    console.log(name, value);
     this.setState({
       [name]: value
     });

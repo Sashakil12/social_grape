@@ -9,13 +9,11 @@ import ScreamWall from "../components/userWall/ScreamsDisplay";
 class UserWall extends React.Component {
   state = { loading: "" };
   componentDidMount() {
-    console.log(this.props.match.params);
     const handle = this.props.match.params.handle;
     this.props.getScreamsByHandle(handle);
   }
   render() {
     const { user, screams, loading } = this.props;
-    console.log(this.props);
     return (
       <Grid container spacing={10}>
         {loading ? (

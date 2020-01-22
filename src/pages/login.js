@@ -56,12 +56,10 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(this.props.history);
     this.props.logUserIn(userData, this.props.history);
   };
   handleChange = e => {
     const { name, value } = e.target;
-    console.log(name, value);
     this.setState({
       [name]: value
     });

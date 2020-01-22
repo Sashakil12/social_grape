@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
 import ToolTip from "@material-ui/core/Tooltip";
 import KeyboardCapslockIcon from "@material-ui/icons/KeyboardCapslock";
 import { connect } from "react-redux";

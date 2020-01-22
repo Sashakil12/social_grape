@@ -19,7 +19,6 @@ class DeleteButton extends React.Component {
     };
   }
   openWarning = () => {
-    console.log("opened");
     this.setState({
       open: true
     });
