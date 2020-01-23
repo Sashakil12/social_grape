@@ -1,4 +1,4 @@
-import { userTypes, likeTypes } from "../types";
+import { userTypes, likeTypes, notificationsType } from "../types";
 const initialState = {
   token: undefined,
   authenticated: false,
@@ -56,6 +56,7 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         credentials: { ...action.payload.credentials },
         likes: [...action.payload.likes],
+        notifications: [...action.payload.notifications],
         errors: initialState.errors
       };
     case userTypes.USER_DATA_FETCH_FAILED:
@@ -109,7 +110,19 @@ const userReducer = (state = initialState, action) => {
         ...state,
         likes: state.likes.filter(l => l.screamId !== action.payload.screamId)
       };
-   
+    case notificationsType.MARK_NOTIFICATIONS_READ_STARTED:
+      return {
+        ...state
+      };
+    case notificationsType.MARK_NOTIFICATIONS_READ_SUCCESS:
+      return {
+        ...state,
+        notifications: []
+      };
+    case notificationsType.MARK_NOTIFICATIONS_READ_FAILED:
+      return {
+        ...state
+      };
     default:
       return state;
   }

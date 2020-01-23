@@ -11,28 +11,22 @@ export const signUserUp = (userData, history) => dispatch => {
   axios
     .post("/signup", userData)
     .then(res => {
-      console.log(res.data);
       localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${res.data.token}`;
-      console.log(res.data);
       dispatch(userSignUpSuccess(res.data.token));
       dispatch(getUserData());
       history.push("/");
     })
     .catch(err => {
-      console.log(err.response.data);
 
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
             dispatch(userSignUpFailed(err.response.data));
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };

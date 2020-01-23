@@ -11,14 +11,11 @@ export const likeThisScream = screamId => dispatch => {
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
 
             dispatch({ type: "LIKE_FAILED" });
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };
 
@@ -30,12 +27,9 @@ export const unLikeThisScream = screamId => dispatch => {
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
            dispatch({ type: "UNLIKE_FAILED" });
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };

@@ -11,13 +11,10 @@ export const getScreamsByHandle = handle => dispatch => {
   axios
     .get(`/user/${handle}`)
     .then(res => {
-      console.log(res.data);
       dispatch(userProfileFetchSucceed(res.data.user));
       dispatch(userScreamsFetchSucceed(res.data.screams));
     })
     .catch(err => {
-      console.log(err);
-      console.log(err.response);
       dispatch(userProfileFetchFailed("Could not fetch profile"));
     });
 };

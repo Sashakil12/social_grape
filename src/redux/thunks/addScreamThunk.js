@@ -10,19 +10,15 @@ export const addScream = body => dispatch => {
   axios
     .post(`/addScream`, body)
     .then(res => {
-      console.log(res.data);
       dispatch(addScreamSuccess(res.data));
     })
     .catch(err => {
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
             dispatch(addScreamFailed(err.response.data));
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };

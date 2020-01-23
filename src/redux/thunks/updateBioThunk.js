@@ -18,12 +18,9 @@ export const updateUserBio = userData => dispatch => {
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
             dispatch(userBioUpdateFailed(err.response.data));
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };

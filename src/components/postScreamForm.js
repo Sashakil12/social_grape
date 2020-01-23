@@ -12,7 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { addScream } from "../redux/thunks/addScreamThunk";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 class PostAScream extends React.Component {
   state = {
     open: false
@@ -40,7 +40,7 @@ class PostAScream extends React.Component {
     this.closeForm();
   };
   render() {
-    const { loading, error } = this.props;
+    const { error } = this.props;
     const { open } = this.state;
     return (
       <Fragment>
@@ -64,6 +64,7 @@ class PostAScream extends React.Component {
                 type="text"
                 value={this.state.scream}
                 fullWidth
+                error={error}
               />
             </DialogContent>
             <DialogActions>
@@ -81,7 +82,6 @@ class PostAScream extends React.Component {
   }
 }
 const mapStateToProp = state => ({
-  loading: state.data.loading,
   error: state.data.error
 });
 const mapDispatchToProp = dispatch => ({

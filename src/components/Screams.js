@@ -29,6 +29,10 @@ const styles = {
   content: {
     padding: 25,
     objectFit: "cover"
+  },
+  interaction: {
+    display: "flex",
+    justifyContent: "space-evenly"
   }
 };
 class Screams extends React.Component {
@@ -41,8 +45,7 @@ class Screams extends React.Component {
       data: { screams },
       classes,
       currentUserHandle,
-      userAuth,
-      likes
+      userAuth
     } = this.props;
     return (
       <div>
@@ -70,17 +73,19 @@ class Screams extends React.Component {
                   {!userAuth ? (
                     <Typography>Please log in to see more...</Typography>
                   ) : (
-                      <Fragment id="interaction">
-                      <LikeButton screamId={scr.screamId} />
-                      <Comment
-                        commentCount={scr.commentCount}
-                        screamId={scr.screamId}
-                      />
-                      {currentUserHandle === scr.userHandle ? (
-                        <DeleteButton screamId={scr.screamId} />
-                      ) : (
-                        ""
-                      )}
+                    <Fragment>
+                      <div className={classes.interaction}>
+                        <LikeButton screamId={scr.screamId} />
+                        <Comment
+                          commentCount={scr.commentCount}
+                          screamId={scr.screamId}
+                        />
+                        {currentUserHandle === scr.userHandle ? (
+                          <DeleteButton screamId={scr.screamId} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </Fragment>
                   )}
                 </CardContent>
@@ -93,7 +98,7 @@ class Screams extends React.Component {
   }
 }
 Screams.propTypes = {
-  data: PropType.array.isRequired
+  data: PropType.object.isRequired
 };
 const mapStateToProps = state => ({
   userAuth: state.user.authenticated,

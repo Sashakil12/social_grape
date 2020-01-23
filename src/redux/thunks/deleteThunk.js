@@ -15,14 +15,11 @@ export const deleteScream = screamId => dispatch => {
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
             dispatch(screamDeleteFailed());
           }
         }
-        console.log(err.response);
         dispatch(screamDeleteFailed());
       }
-      console.log(err);
       dispatch(screamDeleteFailed());
     });
 };

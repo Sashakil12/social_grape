@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import EditDetails from './EditDetails'
+import EditDetails from "./EditDetails";
 ///MUI stuff
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -60,7 +60,7 @@ class Profile extends React.Component {
         <Paper className={classes.paper}>
           <div className="profile">
             <div className={classes.profileImage}>
-              <img src={imageUrl} alt="profile" class="image" />
+              <img src={imageUrl} alt="profile" className="image" />
               <input
                 type="file"
                 id="imageInput"
@@ -68,7 +68,7 @@ class Profile extends React.Component {
                 hidden="hidden"
               />
               <ToolTip placement="top" title="Change Image">
-                <IconButton classNmae="button" onClick={this.handleAttempt}>
+                <IconButton className="button" onClick={this.handleAttempt}>
                   <EditIcon color="primary" />
                 </IconButton>
               </ToolTip>
@@ -101,7 +101,7 @@ class Profile extends React.Component {
               <span>Joined {dayjs(createdAt).format("MMM YY")}</span>
             </div>
           </div>
-          <EditDetails/>
+          <EditDetails />
         </Paper>
       ) : (
         <Paper className={classes.paper}>
@@ -144,4 +144,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   UploadImage: data => dispatch(UploadImage(data))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Profile));

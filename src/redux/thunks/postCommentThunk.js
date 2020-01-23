@@ -13,7 +13,6 @@ export const postComment = (commentBody, screamId) => dispatch => {
       dispatch(postCommentSucceed(res.data));
     })
     .catch(err => {
-      console.log(err);
       dispatch(postCommentFailed("Could not submit!"));
     });
 };

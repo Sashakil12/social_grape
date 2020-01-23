@@ -136,11 +136,9 @@ Login.propTypes = {
   classes: PropTypes.object.isRequired,
   logUserIn: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  ui: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
   user: state.user,
-  ui: state.ui
 });
 const mapDispatchToProps = {
   logUserIn

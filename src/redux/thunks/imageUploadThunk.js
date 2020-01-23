@@ -15,16 +15,12 @@ export const UploadImage = FormData => dispatch => {
       dispatch(userImageUploadSucceed());
     })
     .catch(err => {
-      console.log(err);
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
             dispatch(userImageUploadFailed(err.response.data));
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };

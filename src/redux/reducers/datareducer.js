@@ -54,6 +54,7 @@ const dataReducer = (state = INITIAL_STATE, action) => {
       let index = state.screams.findIndex(i => i.screamId === action.payload);
       state.screams.splice(index, 1);
       return {
+        ...state,
         loading: false,
         error: null,
         screams: [...state.screams]

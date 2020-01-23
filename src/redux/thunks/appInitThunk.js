@@ -16,12 +16,9 @@ export const loadScreams = () => dispatch => {
       if (typeof err === "object") {
         if (err.hasOwnProperty("response")) {
           if (err.response.hasOwnProperty("data")) {
-            console.log(err.response.data);
             dispatch(appInitDataFetchFailed(err.response.data));
           }
         }
-        console.log(err.response);
       }
-      console.log(err);
     });
 };

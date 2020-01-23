@@ -1,9 +1,8 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import dayjs from 'dayjs'
-import LocalizedFormat from 'dayjs/plugin/localizedFormat'
-
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
 
 //comment list
 import List from "@material-ui/core/List";
@@ -28,9 +27,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import { fetchCurrentScream } from "../redux/thunks/commentFetchThunk";
 import { postComment } from "../redux/thunks/postCommentThunk";
 //dayjs
-dayjs.extend(LocalizedFormat)
+dayjs.extend(LocalizedFormat);
 
-dayjs().format('L LT')
+dayjs().format("L LT");
 class Comment extends Component {
   state = {
     open: false,
@@ -49,7 +48,7 @@ class Comment extends Component {
     });
   };
   handleSubmit = () => {
-    this.props.postComment({body: this.state.comment}, this.props.screamId);
+    this.props.postComment({ body: this.state.comment }, this.props.screamId);
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -65,9 +64,8 @@ class Comment extends Component {
         <Fragment>
           <IconButton onClick={this.viewComments}>
             <CommentIcon />
+            {this.props.commentCount}
           </IconButton>
-
-          <Typography>{this.props.commentCount}</Typography>
         </Fragment>
         <Dialog
           open={this.state.open}
@@ -113,41 +111,39 @@ class Comment extends Component {
                     />
                   </ListItem>
                   <Divider variant="inset" component="li" />
-                  </List>
-                  {
-                    currentScream.comments.map(comment => (
-                      <List>
-                        <ListItem alignItems="flex-start">
-                          <ListItemAvatar>
-                            <Avatar alt="profile" src={comment.userImage} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={"@" + comment.userHandle}
-                            secondary={
-                              <React.Fragment>
-                                <Typography
-                                  component="span"
-                                  variant="body2"
-                                  color="textPrimary"
-                                >
-                                  {comment.body}
-                                </Typography>
+                </List>
+                {currentScream.comments.map(comment => (
+                  <List key={comment.createdAt}>
+                    <ListItem alignItems="flex-start">
+                      <ListItemAvatar>
+                        <Avatar alt="profile" src={comment.userImage} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={"@" + comment.userHandle}
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              component="span"
+                              variant="body2"
+                              color="textPrimary"
+                            >
+                              {comment.body}
+                            </Typography>
 
-                                <Typography
-                                  component="span"
-                                  variant="body2"
-                                  color="textPrimary"
-                                >
-                                  {dayjs(comment.createdAt).format('L LT')}
-                                </Typography>
-                              </React.Fragment>
-                            }
-                          />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                      </List>
-                    ))
-                  }
+                            <Typography
+                              component="span"
+                              variant="body2"
+                              color="textPrimary"
+                            >
+                              {dayjs(comment.createdAt).format("L LT")}
+                            </Typography>
+                          </React.Fragment>
+                        }
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                  </List>
+                ))}
               </DialogContent>
 
               <DialogActions>
@@ -170,7 +166,7 @@ class Comment extends Component {
   }
 }
 Comment.propTypes = {
-  currentScream: PropTypes.object.isRequired,
+  currentScream: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   fetchScream: PropTypes.func.isRequired,
   postComment: PropTypes.func.isRequired
